@@ -7,7 +7,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-
       <Navbar />
         <div className="min-h-screen bg-background">
           <main >{children}</main>
