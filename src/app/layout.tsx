@@ -9,9 +9,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
 
       <Navbar />
-        <div className="min-h-screen bg-gray-100">
-          {/* Add your navbars, sidebars here */}
-          <main>{children}</main>
+        <div className="min-h-screen bg-background">
+          <main >{children}</main>
         </div>
       </body>
     </html>

@@ -3,7 +3,7 @@ import React from 'react';
 const PlansPage = () => {
   return (
     <div className="min-h-screen bg-background text-neutralLight">
-      <header className="bg-primary py-6">
+      <header className="bg-primary py-16">
         <div className="container mx-auto px-6 text-center">
           <h1 className="text-4xl font-bold text-neutralLight">Our Plans</h1>
           <p className="mt-4 text-lg">Choose the perfect plan for your needs.</p>
