@@ -1,17 +1,6 @@
-// src/app/dashboard/layout.tsx
-import { useSession } from 'next-auth/react'
+// app/dashboard/layout.tsx
+import DashboardLayout from "@/components/dashboard/DashboardLayout";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const { data: session } = useSession()
-
-  if (!session) {
-    // Redirect to login if not authenticated
-    return <div>Please log in</div>
-  }
-
-  return (
-    <div>
-      <main>{children}</main>
-    </div>
-  )
+export default function DashboardPageLayout({ children }) {
+  return <DashboardLayout>{children}</DashboardLayout>;
 }

@@ -49,7 +49,7 @@ export default function Navbar() {
                 Sign In
               </Button>
             </Link>
-            <Link href="/auth/signup">
+            <Link href="/auth/register">
               <Button className="ml-4 bg-secondary text-white hover:bg-primary">Sign Up</Button>
             </Link>
           </div>

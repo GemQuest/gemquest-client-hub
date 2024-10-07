@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Github, Linkedin, Twitter } from "lucide-react";
+import PublicLayout from "../layouts/PublicLayout";
 
 const teamMembers = [
   {
@@ -25,72 +26,63 @@ const teamMembers = [
 
 export default function TeamMembersPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground py-12">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center text-primary mb-8">Meet Our Team</h1>
-        <p className="text-xl text-center text-lightGray mb-12">
-          The talented individuals behind GemQuest{'\''}s success
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {teamMembers.map((member) => (
-            <Card key={member.name} className="flex flex-col bg-neutralDark border-neutralDark text-neutralLight hover:border-primary transition-all duration-300 ease-in-out hover:shadow-primary hover:shadow-lg">
-              <CardHeader className="text-center">
-                <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-neutralLight flex items-center justify-center">
-                  <svg
-                    className="w-24 h-24 text-gray-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <CardTitle className="text-2xl font-bold text-primary">{member.name}</CardTitle>
-                <p className="text-secondary">{member.role}</p>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-center mb-4">{member.bio}</p>
-                <div className="flex flex-wrap justify-center gap-2 mb-4">
-                  {member.skills.map((skill) => (
-                    <Badge key={skill} variant="secondary">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-                <div className="flex justify-center space-x-4">
-                  <a href="#" className="text-neutralLight hover:text-primary">
-                    <Github className="w-5 h-5" />
-                    <span className="sr-only">GitHub</span>
-                  </a>
-                  <a href="#" className="text-neutralLight hover:text-primary">
-                    <Linkedin className="w-5 h-5" />
-                    <span className="sr-only">LinkedIn</span>
-                  </a>
-                  <a href="#" className="text-neutralLight hover:text-primary">
-                    <Twitter className="w-5 h-5" />
-                    <span className="sr-only">Twitter</span>
-                  </a>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-      
-      <footer className="bg-background text-lightGray py-6 mt-12 border-t-4 border-primary">
-        <div className="container mx-auto px-6 text-center">
-          <p>© 2024 GemQuest. All rights reserved.</p>
-          <div className="mt-4 space-x-4">
-            <a href="#" className="hover:text-secondary hover:underline">Privacy Policy</a>
-            <a href="#" className="hover:text-secondary hover:underline">Terms of Service</a>
-            <a href="#" className="hover:text-secondary hover:underline">Contact Us</a>
+    <PublicLayout>
+      <div className="min-h-screen bg-background text-foreground py-12">
+        <div className="container mx-auto px-4">
+          <h1 className="text-4xl font-bold text-center text-primary mb-8">Meet Our Team</h1>
+          <p className="text-xl text-center text-lightGray mb-12">
+            The talented individuals behind GemQuest{'\''}s success
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {teamMembers.map((member) => (
+              <Card key={member.name} className="flex flex-col bg-neutralDark border-neutralDark text-neutralLight hover:border-primary transition-all duration-300 ease-in-out hover:shadow-primary hover:shadow-lg">
+                <CardHeader className="text-center">
+                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-neutralLight flex items-center justify-center">
+                    <svg
+                      className="w-24 h-24 text-gray-400"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <CardTitle className="text-2xl font-bold text-primary">{member.name}</CardTitle>
+                  <p className="text-secondary">{member.role}</p>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-center mb-4">{member.bio}</p>
+                  <div className="flex flex-wrap justify-center gap-2 mb-4">
+                    {member.skills.map((skill) => (
+                      <Badge key={skill} variant="secondary">
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex justify-center space-x-4">
+                    <a href="#" className="text-neutralLight hover:text-primary">
+                      <Github className="w-5 h-5" />
+                      <span className="sr-only">GitHub</span>
+                    </a>
+                    <a href="#" className="text-neutralLight hover:text-primary">
+                      <Linkedin className="w-5 h-5" />
+                      <span className="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="#" className="text-neutralLight hover:text-primary">
+                      <Twitter className="w-5 h-5" />
+                      <span className="sr-only">Twitter</span>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
-      </footer>
-    </div>
+      </div>
+    </PublicLayout>
   );
 }
