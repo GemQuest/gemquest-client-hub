@@ -1,34 +1,67 @@
-'use client'
+//src/app/auth/reset-password
+"use client";
 
-import { useState } from 'react';
-import StyledInput from '@/components/StyledInput';
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import StyledInput from "@/components/StyledInput";
+import { resetPassword } from "@/services/authService"
+import PublicLayout from "@/app/layouts/PublicLayout";
 
 export default function ResetPasswordPage() {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const handleResetPassword = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Send login request to backend
+    setError(null);
+    setEmailError(null);
+
+    if (!email.includes("@")) {
+      setEmailError("Invalid email address.");
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      await resetPassword(email); // Service to send reset email
+      setSuccess(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-darkGray">
-      <form onSubmit={handleResetPassword} className="p-6 bg-neutralDark shadow-lg rounded-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-neutralLight">Reset Password</h2>
-        
-        <StyledInput
-          label="Email"
-          type="email"
-          id="reset-email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        
-        <button type="submit" className="w-full bg-secondary text-white py-2 rounded-lg mt-4 hover:bg-primary transition-all">
-          Send Reset Link
-        </button>
-      </form>
-    </div>
+    <PublicLayout>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="bg-neutralDark p-8 rounded-lg w-full max-w-md hover:border-primary hover:shadow-lg hover:shadow-primary transition-shadow duration-300">
+          <h1 className="text-2xl font-bold mb-6 text-center text-neutralLight">Reset Password</h1>
+          {success ? (
+            <p className="text-center text-green-500">Password reset email sent. Check your inbox.</p>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <StyledInput
+                label="Email"
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                error={emailError} // Pass the email error message
+              />
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              <Button type="submit" className="w-full bg-secondary text-white hover:bg-primary" disabled={isLoading}>
+                {isLoading ? "Sending..." : "Send Reset Link"}
+              </Button>
+            </form>
+          )}
+        </div>
+      </div>
+    </PublicLayout>
   );
 }
