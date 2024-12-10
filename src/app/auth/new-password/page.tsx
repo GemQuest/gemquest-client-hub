@@ -1,13 +1,22 @@
+// src/app/auth/new-password/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import StyledInput from "@/components/StyledInput";
 import { updatePassword } from "@/services/authService";
 import PublicLayout from "@/app/layouts/PublicLayout";
 
-export default function NewPasswordPage() {
+export default function NewPasswordPageWrapper() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NewPasswordPage />
+    </Suspense>
+  );
+}
+
+function NewPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -51,8 +60,13 @@ export default function NewPasswordPage() {
       setTimeout(() => {
         router.push("/auth/login"); // Redirect to login page after success
       }, 3000); // Delay before redirecting
-    } catch (err: any) {
-      setError(err.message || "An error occurred while updating the password.");
+    } catch (err) {
+      // Check for error message
+      if (err instanceof Error) {
+        setError(err.message); // Use `err.message` safely
+      } else {
+        setError("An unknown error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

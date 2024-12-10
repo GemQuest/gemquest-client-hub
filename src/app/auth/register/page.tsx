@@ -14,7 +14,9 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<{email: string | null;
+    password: string | null;
+    confirmPassword: string | null}>({
     email: null,
     password: null,
     confirmPassword: null,
@@ -59,7 +61,12 @@ export default function RegisterPage() {
       await registerUser(email, password);
       router.push("/auth/login?registerSuccess=true");
     } catch (err) {
-      setError(err.message);
+      // Check for error message
+      if (err instanceof Error) {
+        setError(err.message); // Use `err.message` safely
+      } else {
+        setError("An unknown error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

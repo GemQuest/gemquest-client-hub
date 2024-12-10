@@ -30,7 +30,12 @@ export default function ResetPasswordPage() {
       await resetPassword(email); // Service to send reset email
       setSuccess(true);
     } catch (err) {
-      setError(err.message);
+      // Check for error message
+      if (err instanceof Error) {
+        setError(err.message); // Use `err.message` safely
+      } else {
+        setError("An unknown error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }

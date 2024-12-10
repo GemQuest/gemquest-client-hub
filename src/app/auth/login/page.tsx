@@ -10,10 +10,13 @@ import { loginUser } from "@/services/authService"; // Service to handle login l
 import PublicLayout from "@/app/layouts/PublicLayout";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<{
+    email: string | null;
+    password: string | null;
+  }>({
     email: null,
     password: null,
   });
@@ -45,12 +48,16 @@ export default function LoginPage() {
     }
 
     setIsLoading(true);
-
     try {
-      await loginUser(email, password); // Login service
+      await loginUser(email, password); // Call login service
       router.push("/dashboard");
     } catch (err) {
-      setError(err.message);
+      // Check for error message
+      if (err instanceof Error) {
+        setError(err.message); // Use `err.message` safely
+      } else {
+        setError("An unknown error occurred. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
