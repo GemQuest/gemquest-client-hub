@@ -24,26 +24,22 @@ const users = [
     // Add more users...
   ];
 
-  // Define columns for each table
-  const userColumns = [
-    { header: "User", accessor: "user", sortable: false },
-    { header: "ID", accessor: "id", sortable: true },
-    { header: "Name", accessor: "name", sortable: true },
-    { header: "Email", accessor: "email", sortable: true },
-    { header: "Role", accessor: "role", sortable: true },
-    { header: "Role Group", accessor: "roleGroup", sortable: true },
-  ];
-
 export default function UsersPage() {
+  
+  const userFilters = {
+    role: ["Admin", "User"],
+    roleGroup: ["Management", "Sales"],
+  };
+
   return (
     <div className="space-y-8">
       {/* Users Table */}
       <DataTable
         title="Users"
-        columns={userColumns}
         data={users}
-        filters={{ role: ["Admin", "User"], roleGroup: ["Management", "Sales"] }}
-        searchPlaceholder="Search users..."
+        filters={userFilters}
+        onEdit={(row) => console.log("Edit User:", row)}
+        onDelete={(row) => console.log("Delete User:", row)}
       />
     </div>
   );

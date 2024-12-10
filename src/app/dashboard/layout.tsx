@@ -1,6 +1,11 @@
 // app/dashboard/layout.tsx
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
+import { ReactNode } from "react";
 
-export default function DashboardPageLayout({ children }) {
+interface DashboardPageLayoutProps {
+  children: ReactNode;
+}
+
+export default function DashboardPageLayout({ children }: DashboardPageLayoutProps) {
   return <DashboardLayout>{children}</DashboardLayout>;
 }

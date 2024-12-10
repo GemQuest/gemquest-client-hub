@@ -64,15 +64,15 @@ export default function TeamMembersPage() {
                     ))}
                   </div>
                   <div className="flex justify-center space-x-4">
-                    <a href="#" className="text-neutralLight hover:text-primary">
+                    <a href="https://github.com/Cerlo" className="text-neutralLight hover:text-primary">
                       <Github className="w-5 h-5" />
                       <span className="sr-only">GitHub</span>
                     </a>
-                    <a href="#" className="text-neutralLight hover:text-primary">
+                    <a href="https://www.linkedin.com/in/remy-cerlo-a973a266/" className="text-neutralLight hover:text-primary">
                       <Linkedin className="w-5 h-5" />
                       <span className="sr-only">LinkedIn</span>
                     </a>
-                    <a href="#" className="text-neutralLight hover:text-primary">
+                    <a href="https://x.com/Remy_Crl" className="text-neutralLight hover:text-primary">
                       <Twitter className="w-5 h-5" />
                       <span className="sr-only">Twitter</span>
                     </a>
